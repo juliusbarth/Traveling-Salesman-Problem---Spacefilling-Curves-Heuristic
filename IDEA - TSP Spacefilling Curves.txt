@@ -1,0 +1,27 @@
+https://www2.isye.gatech.edu/~jjb/research/mow/mow.html
+
+Why these curvs are better than just snake curves: 
+https://www.youtube.com/watch?v=3s7h2MHQtxc&ab_channel=3Blue1Brown
+
+Alternative implementation: https://en.wikipedia.org/wiki/Sierpi%C5%84ski_curve
+
+static long sierp_pt2code( double ax, double ay, double bx, double by, double cx, double cy,
+        int currentLevel, int maxLevel, long code, double x, double y ) 
+    {
+        if (currentLevel <= maxLevel) {
+            currentLevel++;
+            if ((sqr(x-ax) + sqr(y-ay)) < (sqr(x-cx) + sqr(y-cy))) {
+                code = sierp_pt2code( ax, ay, (ax+cx)/2.0, (ay+cy)/2.0, bx, by,
+                    currentLevel, maxLevel, 2 * code + 0, x, y );
+            }
+            else {
+                code = sierp_pt2code( bx, by, (ax+cx)/2.0, (ay+cy)/2.0, cx, cy,
+                    currentLevel, maxLevel, 2 * code + 1, x, y );
+            }
+        }
+        return code;    
+    }
+
+Altenrative curve: Moore Curve
+https://en.wikipedia.org/wiki/Moore_curve
+
